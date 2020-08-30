@@ -1,0 +1,66 @@
+<package id="museinvanalysis"
+         name="museinvanalysis"
+         developer="Muse Systems"
+         descrip="Provides inventory position and value reporting summarizations and related maintenance functions."
+         version="0.1.0"
+         updater="2.5.2">
+
+    <pkgnotes>
+        Provides inventory position and value reporting summarizations and related maintenance functions.
+    </pkgnotes>
+    <prerequisite type="license" name="License Terms" >
+        <message>
+&lt;p>
+Muse Systems Request for Quote for xTuple ERP (muserfq) &lt;br/>
+Version 1.1.0
+&lt;/p>
+&lt;p>
+Copyright (C) 2018-2019 &lt;br/>
+Lima Buttgereit Holdings LLC (d/b/a Muse Systems)&lt;br/>
+All Rights Reserved
+&lt;/p>
+&lt;p>
+Muse Systems licenses this file to you under the Apache License, Version 2.0.
+&lt;/p>
+&lt;p>
+See the LICENSE file in the project root for full terms and conditions.&lt;br/>
+See the NOTICE file in the project root for full copyright ownership information.&lt;br/>
+&lt;/p>
+&lt;p>
+muse.information@musesystems.com&lt;br/>
+https://muse.systems
+&lt;/p>
+        </message>
+    </prerequisite>
+        <prerequisite type="Query"
+                name="PostgreSQL Database Version">
+        <query>
+          SELECT CASE WHEN (current_setting('server_version_num'))::integer >= 90500 THEN true ELSE false END;
+        </query>
+        <message>
+          This package must be installed against PostgreSQL Database Version 9.5 or later.
+        </message>
+    </prerequisite>
+    <prerequisite type="Query"
+                name="xTuple ERP version">
+        <query>
+            WITH version AS (
+            SELECT
+                (SELECT substring(fetchMetricText('ServerVersion'),E'^([[:digit:]]+)\..*'))::integer as major_version,
+                (SELECT substring(fetchMetricText('ServerVersion'),E'^[[:digit:]]+\.([[:digit:]]+)\..*$'))::integer as minor_version,
+                (SELECT substring(fetchMetricText('ServerVersion'),E'^[[:digit:]]+\.[[:digit:]]+\.([[:digit:]]+)'))::integer as patch_version
+             )
+             SELECT
+                    (major_version = 4 AND minor_version = 11 AND patch_version >= 3)
+                OR  (major_version = 4 AND minor_version > 11)
+                OR  (major_version > 4)
+             FROM version;
+        </query>
+        <message>
+            This package must be installed against xTuple ERP version 4.11.3 or later.  This package has only been tested against version 4.11.3 and may not work in later version without updating.
+        </message>
+    </prerequisite>
+
+
+
+</package>
