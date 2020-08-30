@@ -61,6 +61,7 @@ https://muse.systems
         </message>
     </prerequisite>
 
-
+    <createview file="database/views/v_itemsite_periods.sql" name="v_itemsite_periods" />
+    <createview file="database/views/v_invdetail_periods.sql" name="v_invdetail_periods" />
 
 </package>
