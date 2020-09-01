@@ -101,4 +101,7 @@ https://muse.systems
     <createfunction file="database/functions/populate_invdetail_by_period.sql" name="populate_invdetail_by_period" />
     <createfunction file="database/functions/populate_all_inventory_analysis.sql" name="populate_all_inventory_analysis" />
 
+    <createfunction file="database/functions/get_itemsite_period_summary.sql" name="get_itemsite_period_summary" />
+    <createfunction file="database/functions/get_invdetail_period_summary.sql" name="get_invdetail_period_summary" />
+
 </package>
