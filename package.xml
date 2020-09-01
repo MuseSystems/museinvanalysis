@@ -2,7 +2,7 @@
          name="museinvanalysis"
          developer="Muse Systems"
          descrip="Provides inventory position and value reporting summarizations and related maintenance functions."
-         version="1.0.0"
+         version="1.1.0"
          updater="2.5.2">
 
     <pkgnotes>
@@ -12,7 +12,7 @@
         <message>
 &lt;p>
 Muse Systems Inventory Analysis for xTuple ERP (museinvanalysis) &lt;br/>
-Version 1.0.0
+Version 1.1.0
 &lt;/p>
 &lt;p>
 Copyright (C) 2018-2019 &lt;br/>
@@ -100,5 +100,8 @@ https://muse.systems
     <createfunction file="database/functions/populate_itemsite_by_period.sql" name="populate_itemsite_by_period" />
     <createfunction file="database/functions/populate_invdetail_by_period.sql" name="populate_invdetail_by_period" />
     <createfunction file="database/functions/populate_all_inventory_analysis.sql" name="populate_all_inventory_analysis" />
+
+    <createfunction file="database/functions/get_itemsite_period_summary.sql" name="get_itemsite_period_summary" />
+    <createfunction file="database/functions/get_invdetail_period_summary.sql" name="get_invdetail_period_summary" />
 
 </package>
