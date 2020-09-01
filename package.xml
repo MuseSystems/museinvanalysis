@@ -60,8 +60,45 @@ https://muse.systems
             This package must be installed against xTuple ERP version 4.11.3 or later.  This package has only been tested against version 4.11.3 and may not work in later version without updating.
         </message>
     </prerequisite>
+        <prerequisite type="Query"
+                   name="Muse Systems xTuple Utilities">
+         <query>
+                WITH version AS (
+                   SELECT
+                       (SELECT substring(pkghead_version,E'^([[:digit:]]+)\..*'))::integer as major_version,
+                       (SELECT substring(pkghead_version,E'^[[:digit:]]+\.([[:digit:]]+)\..*$'))::integer as minor_version,
+                       (SELECT substring(pkghead_version,E'^[[:digit:]]+\.[[:digit:]]+\.([[:digit:]]+)'))::integer as      patch_version
+                    FROM pkghead
+                    WHERE pkghead_name = 'musextputils'
+                )
+                SELECT
+                       (major_version = 6 AND minor_version = 1 AND patch_version >= 0)
+                   OR  (major_version = 6 AND minor_version > 1)
+                   OR  (major_version > 6)
+                FROM version;
+         </query>
+         <message>
+             This package requires that the Muse Systems xTuple Utilities version 6.1.0 or any higher version 6 series is installed prior to installation of this package.
+         </message>
+     </prerequisite>
+
+    <initscript file="database/tables/itemsite_periods.init.sql"/>
+    <initscript file="database/tables/invdetail_periods.init.sql" />
+    <initscript file="database/tables/itemsite_by_period.init.sql"/>
+    <initscript file="database/tables/invdetail_by_period.init.sql"/>
+
+    <createtable file="database/tables/itemsite_periods.sql" name="itemsite_periods" />
+    <createtable file="database/tables/invdetail_periods.sql" name="invdetail_periods" />
+    <createtable file="database/tables/itemsite_by_period.sql" name="itemsite_by_period" />
+    <createtable file="database/tables/invdetail_by_period.sql" name="invdetail_by_period" />
 
     <createview file="database/views/v_itemsite_periods.sql" name="v_itemsite_periods" />
     <createview file="database/views/v_invdetail_periods.sql" name="v_invdetail_periods" />
+
+    <createfunction file="database/functions/populate_itemsite_periods.sql" name="populate_itemsite_periods" />
+    <createfunction file="database/functions/populate_invdetail_periods.sql" name="populate_invdetail_periods" />
+    <createfunction file="database/functions/populate_itemsite_by_period.sql" name="populate_itemsite_by_period" />
+    <createfunction file="database/functions/populate_invdetail_by_period.sql" name="populate_invdetail_by_period" />
+    <createfunction file="database/functions/populate_all_inventory_analysis.sql" name="populate_all_inventory_analysis" />
 
 </package>
