@@ -2,7 +2,7 @@
          name="museinvanalysis"
          developer="Muse Systems"
          descrip="Provides inventory position and value reporting summarizations and related maintenance functions."
-         version="0.1.0"
+         version="1.0.0"
          updater="2.5.2">
 
     <pkgnotes>
@@ -11,8 +11,8 @@
     <prerequisite type="license" name="License Terms" >
         <message>
 &lt;p>
-Muse Systems Request for Quote for xTuple ERP (muserfq) &lt;br/>
-Version 1.1.0
+Muse Systems Inventory Analysis for xTuple ERP (museinvanalysis) &lt;br/>
+Version 1.0.0
 &lt;/p>
 &lt;p>
 Copyright (C) 2018-2019 &lt;br/>
