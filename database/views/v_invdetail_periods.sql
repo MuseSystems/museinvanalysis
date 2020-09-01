@@ -27,13 +27,12 @@ CREATE OR REPLACE VIEW museinvanalysis.v_invdetail_periods AS
         ,time.period_end
         ,time.period_closed
         ,time.period_freeze
-        ,time.period_initial
         ,time.period_name
         ,time.period_quarter
         ,time.period_number
         ,items.itemsite_id
-        ,items.location_id
-        ,items.ls_id
+        ,nullif(items.location_id, -1) AS location_id
+        ,nullif(items.ls_id, -1) AS ls_id
         ,items.itemloc_qty AS current_qtyonhand
         ,items.transaction_first_date
         ,items.transaction_last_date
@@ -77,8 +76,8 @@ CREATE OR REPLACE VIEW museinvanalysis.v_invdetail_periods AS
                     ,invdetail_location_id
                     ,invdetail_ls_id
                     ,itemloc_qty) items
-            ON items.transaction_first_date < time.period_end AND
-                (items.transaction_last_date > time.period_start OR
+            ON items.transaction_first_date <= time.period_end AND
+                (items.transaction_last_date >= time.period_start OR
                     items.has_inventory);
 
 ALTER VIEW museinvanalysis.v_invdetail_periods OWNER TO admin;

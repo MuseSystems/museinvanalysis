@@ -27,7 +27,6 @@ CREATE OR REPLACE VIEW museinvanalysis.v_itemsite_periods AS
         ,time.period_end
         ,time.period_closed
         ,time.period_freeze
-        ,time.period_initial
         ,time.period_name
         ,time.period_quarter
         ,time.period_number
@@ -53,8 +52,8 @@ CREATE OR REPLACE VIEW museinvanalysis.v_itemsite_periods AS
                         ON invhist_itemsite_id = itemsite_id
                 WHERE invhist_posted
                 GROUP BY itemsite_id) items
-            ON items.transaction_first_date < time.period_end AND
-                (items.transaction_last_date > time.period_start OR
+            ON items.transaction_first_date <= time.period_end AND
+                (items.transaction_last_date >= time.period_start OR
                     items.has_inventory);
 
 ALTER VIEW museinvanalysis.v_itemsite_periods OWNER TO admin;
